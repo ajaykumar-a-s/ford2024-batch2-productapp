@@ -2,6 +2,8 @@ import dto.Product;
 import exception.ProductException;
 import exception.UpdateProductException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import service.ProductService;
 import service.ProductServiceImpl;
@@ -24,9 +26,20 @@ public class ProductServiceTest {
 //
 ProductService dummyProductService = new ProductServiceImpl();
 
+
+
+    @BeforeAll // test data preparation
+    public static void beforeAllTestCases(){
+
+    }
+
     //+ve
     @Test
-    public void addProductTest() {
+
+    
+
+    @DisplayName("Adding new Product Test & @#$% :)")
+    public void addProductTest(){
         ProductService productService = new ProductServiceImpl();
         try {
             Assertions.assertNotNull(productService.addProduct(new Product(1, "iPhone", 55000.0)));
