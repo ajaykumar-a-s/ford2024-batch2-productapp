@@ -38,13 +38,17 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product getProductById(Integer id) throws ProductException{
         // handle exception if product id does not exists
-        //if(!this.productMap.containsKey(id)) // throw productNotFound exception
+        if(!this.productMap.containsKey(id)) {
+            throw new ProductException("Product Not Found");
+        }
             return this.productMap.get(id);
     }
     @Override
     public Product updateProduct(Product updateProduct) throws UpdateProductException {
      // check if updateProduct id is available in map else throw exception
-
+        if (!this.productMap.containsKey(updateProduct.getId())){
+            throw new UpdateProductException("Unavailable ID");
+        }
      this.productMap.replace(updateProduct.getId(),updateProduct);
         return this.productMap.get(updateProduct.getId());
     }
@@ -55,6 +59,9 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Boolean deleteProdctById(Integer id)throws ProductException {
         // check if product id exists if not throw exception
+        if (!this.productMap.containsKey(id)){
+            throw new ProductException("Unavailable ID");
+        }
         this.productMap.remove(id);
         return true;
     }
